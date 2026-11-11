@@ -23,7 +23,14 @@
 <section id="admin" class="admin wrap hidden"><div class="panel"><button class="secondary" onclick="closeAdmin()">← Voltar ao cardápio</button><h1>Administração</h1><div id="login"><p class="muted">Entre para gerenciar o catálogo neste protótipo.</p><div class="field"><label>Usuário</label><input id="user" value="docespanucci"></div><div class="field"><label>Senha</label><input id="pass" type="password" placeholder="Senha de demonstração: panucci123"></div><button class="primary" onclick="login()">Entrar</button></div>
 <div id="adminContent" class="hidden"><div class="notice">Protótipo inicial: as alterações ficam salvas neste navegador. Antes de publicar para clientes, precisamos ligar o painel a um banco de dados e autenticação segura.</div><h2>Adicionar produto</h2><div class="field"><label>Nome</label><input id="pname" placeholder="Ex.: Brownie tradicional"></div><div class="field"><label>Categoria</label><input id="pcat" placeholder="Ex.: Brownies"></div><div class="field"><label>Descrição</label><input id="pdesc" placeholder="Descrição curta"></div><div class="field"><label>Preço (R$)</label><input id="pprice" type="number" min="0" step="0.01" placeholder="0,00"></div><div class="field"><label>Foto do produto</label><input id="pimage" type="file" accept="image/*"></div><button class="primary" onclick="addProduct()">Salvar produto</button><h2 style="margin-top:24px">Produtos cadastrados</h2><div id="adminProducts"></div></div></div></section>
 <footer class="foot">DOCES PANUCCI • Goioerê - Paraná</footer>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+ const SUPABASE_URL = 'https://hkhqmebhakqflhhkseja.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_oLieNWGJyORPhInS1Yo7GQ_wfDctMMo';
+ const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 const WHATSAPP='5544997275676';
 const fees={'Aeroporto':10,'Centro':6,'Condomínio Porto das Águas':7,'Conjunto Águas Claras':6,'Jaracatiá':15,'Jardim América I':6,'Jardim América II':6,'Jardim América III':6,'Jardim Bela Vista':6,'Jardim Canadá':6,'Jardim Cidade Alta':6,'Jardim Colina Verde':6,'Jardim Colina Verde III':6,'Jardim Cristo Rey':6,'Jardim Curitiba':6,'Jardim Europa':6,'Jardim Galiléia':6,'Jardim Itália':6,'Jardim Lindóia':6,'Jardim Morumbi':6,'Jardim Primavera':6,'Jardim Santa Casa':6,'Jardim Santa Mônica':6,'Jardim Tropical':6,'Jardim Universitário':8,'Parque Cidade Jardim':6,'Parque Industrial':6,'Residencial Jardins de Mônaco':6,'Vila Candeias':6,'Vila Guaíra':6};
 let products=JSON.parse(localStorage.getItem('panucci_products')||'null')||[
