@@ -33,10 +33,7 @@ const SUPABASE_KEY = 'sb_publishable_oLieNWGJyORPhInS1Yo7GQ_wfDctMMo';
 );
 const WHATSAPP='5544997275676';
 const fees={'Aeroporto':10,'Centro':6,'Condomínio Porto das Águas':7,'Conjunto Águas Claras':6,'Jaracatiá':15,'Jardim América I':6,'Jardim América II':6,'Jardim América III':6,'Jardim Bela Vista':6,'Jardim Canadá':6,'Jardim Cidade Alta':6,'Jardim Colina Verde':6,'Jardim Colina Verde III':6,'Jardim Cristo Rey':6,'Jardim Curitiba':6,'Jardim Europa':6,'Jardim Galiléia':6,'Jardim Itália':6,'Jardim Lindóia':6,'Jardim Morumbi':6,'Jardim Primavera':6,'Jardim Santa Casa':6,'Jardim Santa Mônica':6,'Jardim Tropical':6,'Jardim Universitário':8,'Parque Cidade Jardim':6,'Parque Industrial':6,'Residencial Jardins de Mônaco':6,'Vila Candeias':6,'Vila Guaíra':6};
-let products=JSON.parse(localStorage.getItem('panucci_products')||'null')||[
-{id:1,name:'Mini brownie tradicional',category:'Brownies',desc:'Brownie macio e chocolatudo.',price:3,image:'',emoji:'🍫'},
-{id:2,name:'Mini brownie com cobertura',category:'Brownies',desc:'Brownie com cobertura especial.',price:4,image:'',emoji:'🍫'},
-{id:3,name:'Docinhos',category:'Docinhos',desc:'Docinhos preparados com carinho.',price:1.1,image:'',emoji:'🍬'}];
+let products=[];
 let cart={};let active='Todos';const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});function persist(){localStorage.setItem('panucci_products',JSON.stringify(products))}
 const bairro=document.getElementById('bairro');Object.keys(fees).sort((a,b)=>a.localeCompare(b,'pt-BR')).forEach(n=>{let o=document.createElement('option');o.value=n;o.textContent=n;bairro.appendChild(o)});
 function renderCats(){let names=['Todos',...new Set(products.map(p=>p.category).filter(Boolean))];document.getElementById('cats').innerHTML=names.map(n=>`<button class="cat ${active===n?'active':''}" onclick="active=${JSON.stringify(n)};renderCats();renderProducts()">${n}</button>`).join('')}
